@@ -1,1 +1,63 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  font-family: Montserrat, sans-serif;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  margin: 0;
+}
+button {
+  color: white;
+  background-color: rgb(100,0,120);
+  display: inline-flex;
+  cursor: pointer;
+  border: none;
+  align-items: center;
+}
+/* top-bar.component*/
+app-top-bar {
+  color: white;
+  width: 100vw;
+  height: 10vh;
+  background-color: rgb(0,110,180);
+  display: flex;
+  padding: 15px;
+  justify-content: space-around;
+}
+app-top-bar h1 {
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+}
+/*app=station-selection.component*/
+app-station-selection {
+  display: flex;
+  flex-direction: column;
+}
+app-station-selection div {
+  width: 100%;
+}
+.auto-localize {
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.auto-localize button {
+  font-size: 1.2em;
+  margin: 0 auto;
+  padding: 15px 40px;
+  border-radius: 35px;
+}
+.manual-localisation {
+  height: 50vh;
+  background-color: rgb(153, 153, 255);
+}
+.manual-localisation-form {
+  width: 300px;
+  margin: 0 auto;
+}
+
+

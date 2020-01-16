@@ -1,0 +1,14 @@
+<div class="auto-localize">
+  <button (click)="getLocalization()">Zlokalizuj najbliższą stację</button>
+  <h4>{{localisation['lat']}}, {{localisation['lon']}}</h4>
+</div>
+
+<div class="manual-localisation">
+  <div class="manual-localisation-form" *ngIf="stations">
+    <h3> Wybierz stację z listy</h3>
+    <h3>{{stations[0]['stationName']}}</h3>
+    <button> Wybierz stację </button>
+  </div>
+</div>
+
+

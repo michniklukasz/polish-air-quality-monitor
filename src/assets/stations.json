@@ -1,0 +1,50 @@
+[
+  {
+  "id": 14,
+  "stationName": "Działoszyn",
+  "gegrLat": "50.972167",
+  "gegrLon": "30.941319",
+  "city": {
+    "id": 192,
+    "name": "Działoszyn",
+    "commune": {
+      "communeName": "Bogatynia",
+      "districtName": "zgorzelecki",
+      "provinceName": "DOLNOŚLĄSKIE"
+      }
+    },
+  "addressStreet": null
+  },
+  {
+    "id": 15,
+    "stationName": "Działoszynnn15",
+    "gegrLat": "41.972167",
+    "gegrLon": "24.941319",
+    "city": {
+      "id": 192,
+      "name": "Działoszyn",
+      "commune": {
+        "communeName": "Bogatynia",
+        "districtName": "zgorzelecki",
+        "provinceName": "DOLNOŚLĄSKIE"
+      }
+    },
+    "addressStreet": null
+  },
+  {
+    "id": 16,
+    "stationName": "Działoszyn16",
+    "gegrLat": "32.972167",
+    "gegrLon": "14.941319",
+    "city": {
+      "id": 192,
+      "name": "Działoszyn",
+      "commune": {
+        "communeName": "Bogatynia",
+        "districtName": "zgorzelecki",
+        "provinceName": "DOLNOŚLĄSKIE"
+      }
+    },
+    "addressStreet": null
+  }
+]
