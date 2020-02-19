@@ -1,0 +1,9 @@
+    <div class="sensor-data-box">
+        <button (click)="check()">btn</button>
+        <div *ngIf="currentValue !== undefined">
+            <!-- .idParam check if should apply CO units mg/m3 or units for rest ug/m3-->
+            <p *ngIf="sensor.param.idParam === 8">{{sensor.param.paramName}}: {{currentValue}} [mg/m<sup>3</sup>]</p>
+            <p *ngIf="sensor.param.idParam !== 8">{{sensor.param.paramName}}: {{currentValue}} [µg/m<sup>3</sup>]</p>
+        </div>
+    </div>
+

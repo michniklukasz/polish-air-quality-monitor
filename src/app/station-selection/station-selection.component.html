@@ -1,14 +1,61 @@
-<div class="auto-localize">
-  <button (click)="getLocalization()">Zlokalizuj najbliższą stację</button>
-  <h4>{{localisation['lat']}}, {{localisation['lon']}}</h4>
+<div class="banner">
+  <h2>Hej! Sprawdź jakość powietrza którym oddychasz!</h2>
 </div>
-
-<div class="manual-localisation">
-  <div class="manual-localisation-form" *ngIf="stations">
-    <h3> Wybierz stację z listy</h3>
-    <h3>{{stations[0]['stationName']}}</h3>
-    <button> Wybierz stację </button>
+<div class="station-selection-container">
+  <app-user-auto-localization [stations]="stations"></app-user-auto-localization>
+  <div class="manual-localization">
+    <div class="manual-localization-banner">
+      <h2>lub wyszukaj stację samodzielnie :)</h2>
+    </div>
+    <div>
+      <input type="text" [(ngModel)]="voivodeshipTerm"
+             value="{{selectedVoivodeship}}"
+             placeholder="{{ selectedVoivodeship ? selectedVoivodeship : 'województwo...'}}"
+             (click)="deleteSelectedVoivodeship()">
+    </div>
+    <div *ngIf="voivodeshipTerm.length > 0 && selectedVoivodeship == null">
+      <ul *ngFor="let voivodeship of voivodeships | VoivodeshipFilterPipe: voivodeshipTerm">
+          <li (click)="getSelectedVoivodeship(voivodeship)">{{ voivodeship }}</li>
+      </ul>
+    </div>
+  <div>
+    <input type="text" 
+           value = "{{selectedCity}}"
+           placeholder="{{ selectedCity ? selectedCity : 'Miasto...'}}"
+           [(ngModel)]="cityTerm"
+           (click)="deleteSelectedCity()">
+  </div>
+  <div *ngIf="cityTerm.length > 0 && selectedCity == null">
+    <ul *ngFor="let city of cities | CityFilterPipe: cityTerm">
+      <li (click)="getSelectedCity(city)">{{ city }}</li>
+    </ul>
+  </div>
+  <button (click)="check()"></button>
+  <div>
+    <ul *ngFor="let station of stationsInCity">
+    <li>{{ station.city.name }}, {{ station.addressStreet }}</li>
+    </ul>
+  </div>
+    <!-- __________________________________________________ -->
+    <div class="manual-localization-form" >
+      <form>
+        <label for="stations">Wyszukaj stację: </label>
+        <select [(ngModel)]="selectedStation$"
+                name="selectedStation" 
+                id="stations" required>
+                <!-- [ngValue] binds object, [value] binds only strong type, no selectedStation is object type -->
+          <option *ngFor="let station of stations" [ngValue]="station">{{station.city.name}}, {{station.addressStreet}}</option>
+        </select>
+      </form>
+    </div>
+    <div *ngIf="selectedStation$ !== undefined">
+      <span>Nazwa stacji: {{selectedStation$.stationName | uppercase }}</span><br>
+      <span>Miejscowość: {{selectedStation$.city.name | uppercase }}</span><br>
+      <span>Województwo: {{selectedStation$.city.commune.provinceName | uppercase }}</span><br>
+      <span>Powiat: {{selectedStation$.city.commune.districtName | uppercase }}</span><br>
+      <span>Powiat: {{selectedStation$.id }}</span><br>
+      <button type="submit" (click)="onUserSubmit()">Przejdź do stacji</button>
+    </div>
   </div>
 </div>
-
 

@@ -1,19 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { TopBarComponent } from './top-bar.component';
 
-describe('TopBarComponent', () => {
-  let component: TopBarComponent;
-  let fixture: ComponentFixture<TopBarComponent>;
+import { SensorDataComponent } from './sensor-data.component';
+
+describe('SensorDataComponent', () => {
+  let component: SensorDataComponent;
+  let fixture: ComponentFixture<SensorDataComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TopBarComponent ]
+      declarations: [ SensorDataComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TopBarComponent);
+    fixture = TestBed.createComponent(SensorDataComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
