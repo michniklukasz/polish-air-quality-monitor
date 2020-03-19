@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TopBarService } from '../top-bar.service';
-import { StationsDataService } from '../stations-data.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -12,7 +11,7 @@ export class TopBarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private topBar: TopBarService,) {}
+    public topBar: TopBarService) {}
   ngOnInit() {
   }
   backToMain() {
