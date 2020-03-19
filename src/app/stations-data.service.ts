@@ -2,68 +2,60 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Station } from './I-selected-station';
-import { tap, timeout} from 'rxjs/operators';
+import { map, tap, timeout} from 'rxjs/operators';
 import { SensorData } from './I-sensor-data';
+import { Sensor } from './I-sensor';
+import { IndexLevel } from './I-index-level';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class StationsDataService {
-  private getStationsUrl = 'http://api.gios.gov.pl/pjp-api/rest/station/findAll';
+  // ----------------------------------------URL TO GIOS-API DATA----------------------------------------------
+  private STATIONS_URL = 'http://api.gios.gov.pl/pjp-api/rest/station/findAll';
+  private STATION_DATA_URL = 'http://api.gios.gov.pl/pjp-api/rest/station/sensors/';
+  private SENSOR_DATA_URL = 'http://api.gios.gov.pl/pjp-api/rest/data/getData/';
+  private STATION_AQI = 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/';
+  // ----------------------------------------SETING BEHAVIORAL SUBJECT-----------------------------------------
   private selectedStationSource = new BehaviorSubject<Station>(null);
-  selectedStation$: Station | any = this.selectedStationSource.asObservable();
-  closestStations$: Station[] | any;
+  public selectedStation$: Station | any = this.selectedStationSource.asObservable();
   constructor(
     private http: HttpClient,
-  ) { }
-  // how to manage CORS: https://daveceddia.com/access-control-allow-origin-cors-errors-in-angular/
+  ) {}
+  // -----------------------------------API REQUEST METHODS TO GIOS-API----------------------------------------
   getStations(): Observable<Station[]> {
-    return this.http.get<Station[]>(this.getStationsUrl).pipe(
+    return this.http.get<Station[]>(this.STATIONS_URL).pipe(
       // Why it works but VS Code shout its an Object...??
       timeout(5000),
       tap(data => data.sort((a, b) => (a.city.name > b.city.name) ? 1 : ((b.city.name > a.city.name) ? -1 : 0))),
     );
   }
-  setSelectedStation(station: Station): void {
-    this.selectedStationSource.next(station);
-  }
-  getStationData(stationId: number) {
-      return this.http.get(`http://api.gios.gov.pl/pjp-api/rest/station/sensors/${stationId}`);
+  getStationData(stationId: number): Observable<Sensor[]> {
+    return this.http.get<Sensor[]>(this.STATION_DATA_URL + stationId);
   }
   getSensorData(sensorId: number) {
-      return this.http.get<SensorData>(`http://api.gios.gov.pl/pjp-api/rest/data/getData/${sensorId}`);
+    return this.http.get<SensorData>(this.SENSOR_DATA_URL + sensorId);
   }
-  getStationAQI(stationId: number) {
-    return this.http.get(`http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/${stationId}`);
+  getStationAQI(stationId: number): Observable<any> {
+    return this.http.get<any>(this.STATION_AQI + stationId).pipe(
+      map(res => res.stIndexLevel)
+    );
   }
-  // come of sensorData.values array have empty arrays...
+  // ----------------------------------------------OTHER METHODS-----------------------------------------------
+  // used in stations-data.ts to prevent null readings from station sensor;
+  // sometimes sensor reading in latest array of sensorData.values is empty, method prevent displaying null value
+  // method search for most recent array with value from sensor reading
   searchForLatesValueInSensorData(sensorData: SensorData) {
+    // reading is an array
     for (const reading of sensorData.values) {
-      if (typeof reading.value === 'number') {
-        return reading.value;
+      if (Number.isFinite(reading.value)) {
+        return Number(reading.value.toFixed(1));
       }
     }
   }
-  //                                                METHODS FOR COMPONTNT additional
-  // works for stations sorted by city name
-  // getAllCities(AllStations: Station[]): string[] {
-  //  return AllStations.map(station => station.city.name).filter((city, idx, cities) => {
-  //    return !idx || city !== cities[idx - 1];
-  //  });
-    // return AllStations.filter((station, idx, stations) => {
-    //   return !idx || station[idx].city.name !== stations[idx - 1].city.name;
-  filterBySelectedVoivodeship(stations: Station[], voivodeship: string): Station[] {
-    return stations.filter(station => {
-      return station.city.commune.provinceName.toLowerCase() === voivodeship;
-    });
-  }
-  filterCitiesInVoivodeship(stations: Station[]): string[] {
-    return stations.map(station => station.city.name).filter((city, idx, cities) => {
-      return !idx || city !== cities[idx - 1];
-    });
-  }
-  filterStationsInCity(stations: Station[], selectedCity: string): Station[] {
-    return stations.filter(station => station.city.name === selectedCity);
+  // sets behavioral subject value through components
+  setSelectedStation(station: Station): void {
+    this.selectedStationSource.next(station);
   }
 }

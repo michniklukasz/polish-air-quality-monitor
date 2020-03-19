@@ -1,3 +1,16 @@
-<i class="material-icons top-icon">menu</i>
-<h1>Powietrze</h1>
-<i class="material-icons top-icon">my_location</i>
+<div class="top-bar">
+    <div class="header"
+         *ngIf="!topBar.visible">
+        <h1>AIRe</h1>
+        <i class="material-icons">
+            favorite
+        </i>
+    </div>
+    <button class="btn"
+            *ngIf="topBar.visible">
+        <i class="material-icons"
+        (click)="backToMain()">
+        keyboard_backspace
+        </i>
+    </button>
+</div>

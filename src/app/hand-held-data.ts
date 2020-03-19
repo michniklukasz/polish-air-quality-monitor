@@ -8,7 +8,7 @@ export const voivodeships = [
     'mazowieckie',
     'opolskie',
     'podkarpackie',
-   ' podlaskie',
+    'podlaskie',
     'pomorskie',
     'śląskie',
     'świętokrzyskie',

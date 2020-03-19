@@ -1,47 +1,66 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StationsDataService } from '../stations-data.service';
 import { Station } from '../I-selected-station';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { voivodeships } from '../hand-held-data';
-
+import { TopBarService } from '../top-bar.service';
 
 @Component({
   selector: 'app-station-selection',
   templateUrl: './station-selection.component.html',
   styleUrls: ['./station-selection.component.css']
 })
-export class StationSelectionComponent implements OnInit, OnDestroy {
-  //                                                          ALL STATIONS FORM GIOS API
-  stationsData$: Subscription;
+export class StationSelectionComponent implements OnInit {
+  // ------------------------------------ALL STATIONS FORM GIOS API OR WEB STORAGE API -------------------
   stations: Station[];
-  stationsInVoivodeship: Station[];
-  stationsInCity: Station[];
-  //                                                        VOIVODESHIP SELECTION VARIABLES
+  // -------------------------------------------VOIVODESHIP SELECTION VARIABLES---------------------------
   voivodeships: string[] = voivodeships;
-  voivodeshipTerm: string = '';
+  voivodeshipTerm: string;
   selectedVoivodeship: string;
-  //                                                            CITY SELECTION VARIABLES
-
+  // -------------------------------------------CITY SELECTION VARIABLES----------------------------------
   cities: string[];
-  // cities: string[] | undefined;
-  cityTerm: string = '';
+  cityTerm: string;
   selectedCity: string;
-  //                                              STATION SELECTED BY USER OR AUTO-LOCALIZATION-SERVICE
+  // ----------------------------------------------SETTED ACORDING TO USER INPUT--------------------------
+  // selected station
   selectedStation$: Station;
+  // filtered array of all stations, represents stations in selected voivodeship
+  stationsInVoivodeship: Station[];
+  // filtered stationsInVoivodeship, represents stations in seleted city
+  stationsInCity: Station[];
   constructor(
     private stationsData: StationsDataService,
     private router: Router,
-  ) { }
-  //                                                      VOIVODESHIP SELECTION METHODS
-  // gets selected voivodeship by User
-  getSelectedVoivodeship(voivodeship: string): void {
-    this.selectedVoivodeship = voivodeship;
-    this.stationsInVoivodeship = this.stationsData.filterBySelectedVoivodeship(this.stations, voivodeship);
-    this.cities = this.stationsData.filterCitiesInVoivodeship(this.stationsInVoivodeship);
+    private topBar: TopBarService,
+  ) {
+    // setting initial values
+    this.selectedVoivodeship = undefined;
+    this.selectedCity = undefined;
+    this.cityTerm = '';
+    // this.voivodeshipTerm = '';
   }
-  // removes previous selectedVoivodeship and VoivodeshipTerm
-  deleteSelectedVoivodeship(): void {
+  // -------------------------------------------VOIVODESHIP SELECTION METHODS-----------------------------------
+  private filterBySelectedVoivodeship(stations: Station[], voivodeship: string): Station[] {
+    return stations.filter(station => {
+      return station.city.commune.provinceName.toLowerCase() === voivodeship;
+    });
+  }
+  private removeDuplicateCitiesInVoivodeship(stations: Station[]): string[] {
+    return stations.map(station => station.city.name).filter((city, idx, cities) => {
+      return !idx || city !== cities[idx - 1];
+    });
+  }
+  getSelectedVoivodeship(voivodeship: string): void {
+    // sets selected voivodeship by User in input
+    this.selectedVoivodeship = voivodeship;
+    // return new array with stations in selected voivodeship
+    this.stationsInVoivodeship = this.filterBySelectedVoivodeship(this.stations, voivodeship);
+    // create new array with city names,
+    // if more than one station in city -> removes duplicating city names from array
+    this.cities = this.removeDuplicateCitiesInVoivodeship(this.stationsInVoivodeship);
+  }
+   // removes previous selectedVoivodeship and VoivodeshipTerm
+   deleteSelectedVoivodeship(): void {
     if (this.selectedVoivodeship !== undefined) {
       this.selectedVoivodeship = undefined;
       this.voivodeshipTerm = '';
@@ -50,36 +69,53 @@ export class StationSelectionComponent implements OnInit, OnDestroy {
       this.cities = [];
     }
   }
-  //                                                        CITY SELECTION METHODS
+  // -------------------------------------------CITY SELECTION-------------------------------------------
+  //                COMPONENT METHODS
+  // used to find stations in selected city by User;
+  private findStationsInCity(stations: Station[], selectedCity: string): Station[] {
+    return stations.filter(station => station.city.name === selectedCity);
+  }
+  //                VIEW METHODS
   // gets selected city by User
   getSelectedCity(city: string): void {
     this.selectedCity = city;
-    this.stationsInCity = this.stationsData.filterStationsInCity(this.stationsInVoivodeship, city);
+    this.stationsInCity = this.findStationsInCity(this.stationsInVoivodeship, city);
   }
   // removes previous selectedCity and cityTerm
   deleteSelectedCity(): void {
     if (this.selectedCity !== undefined) {
       this.selectedCity = undefined;
       this.cityTerm = '';
+      this.stationsInCity = [];
     }
   }
-  check() {
-    console.log(this.selectedCity);
+  // --------------------------------------------WEB STORAGE API----------------------------------------
+  // pass fetched all stations form gios api to Web Storage API
+  private setItemToLocalStorage(key: string, data: object): void {
+    localStorage.setItem(key, JSON.stringify(data));
   }
-  //                                                          ???????????????
-  onUserSubmit() {
-    // Takes selected station through NgModule 2way binding and sets to BehavioralSubject
-    this.stationsData.setSelectedStation(this.selectedStation$);
+  // gets all stations form Web Storage API
+  private getStationsFromLocalStorage(key: string): Station[] {
+    if (localStorage.getItem(key) !== null) {
+      return JSON.parse(localStorage.getItem(key));
+    }
+  }
+  // -----------------------------------------GO TO SELECTED STATION------------------------------------
+  goToSelectedStation(station: Station): void {
+    // Takes selected station and share within components with BehavioralSubject
+    this.stationsData.setSelectedStation(station);
     this.router.navigate(['/station']);
   }
+  // ----------------------------------------------OnInit-----------------------------------------------
   ngOnInit() {
-    if (localStorage.getItem('stations') === null && localStorage.getItem('cities') === null) {
-      this.stationsData$ = this.stationsData.getStations()
+    // hide elements in top-bar.component through top-bar.service
+    this.topBar.hide();
+    // gets all stations list form localStorage if its egsists in storage, else skip futher
+    this.stations = this.getStationsFromLocalStorage('stations');
+    this.stationsData.getStations()
       .subscribe(data => {
         this.stations = data;
-        localStorage.setItem('stations', JSON.stringify(data));
-        // this.cities = this.stationsData.getAllCities(data);
-        // localStorage.setItem('cities', JSON.stringify(this.cities));
+        this.setItemToLocalStorage('stations', data);
       },
       error => {
         console.log(error);
@@ -87,12 +123,6 @@ export class StationSelectionComponent implements OnInit, OnDestroy {
         // when problem with fetch data, redirect to connection-error page
         // this.router.navigate(['/connection-error']);
       });
-    } else {
-      this.stations = JSON.parse(localStorage.getItem('stations'));
-      // this.cities = JSON.parse(localStorage.getItem('cities'));
-    }
-  }
-  ngOnDestroy() {
-    this.stationsData$.unsubscribe();
   }
 }
+

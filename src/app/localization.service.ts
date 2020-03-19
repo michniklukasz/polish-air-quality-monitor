@@ -29,10 +29,19 @@ export class LocalizationService {
   sortStationsByDistance(unsortedStationss) {
       return unsortedStationss.sort((a, b) => a.delta as number - b.delta as number);
   }
-  createArrayOfFiveClosestStations(allStations: Station[], sortedByDistance) {
+  createArrayOfFiveClosestStations(allStations: Station[], sortedByDistance): Station[] {
     const fiveStationIds = sortedByDistance.slice(0, 4).map(element => element.id);
     return fiveStationIds.map((id) => {
        return allStations.filter(station => station.id === id);
     }).flat();
+  }
+  async auto(stations) {
+    let userLocalization;
+    let unsortedStationss;
+    let sortedByDistance;
+    userLocalization = await this.getUserLocalization();
+    unsortedStationss = this.calculateDistance(userLocalization, stations);
+    sortedByDistance = this.sortStationsByDistance(unsortedStationss);
+    return this.createArrayOfFiveClosestStations(stations, sortedByDistance);
   }
 }

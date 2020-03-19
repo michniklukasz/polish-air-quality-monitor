@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class UserAutoLocalizationComponent implements OnInit {
    // Closest stations to User, found by Users localization
-  closestStations: Station[] = [];
+  closestStations: Station[];
   @Input() stations: Station[];
 
   constructor(
@@ -19,17 +19,8 @@ export class UserAutoLocalizationComponent implements OnInit {
     private autoLocalization: LocalizationService,
     private router: Router,
   ) { }
-  async auto() {
-    let userLocalization;
-    let unsortedStationss;
-    let sortedByDistance;
-    userLocalization = await this.autoLocalization.getUserLocalization();
-    unsortedStationss = this.autoLocalization.calculateDistance(userLocalization, this.stations);
-    sortedByDistance = this.autoLocalization.sortStationsByDistance(unsortedStationss);
-    this.closestStations = this.autoLocalization.createArrayOfFiveClosestStations(this.stations, sortedByDistance);
-  }
   async onAutoSubmit() {
-    await this.auto();
+    this.closestStations = await this.autoLocalization.auto(this.stations);
     this.stationsData.setSelectedStation(this.closestStations[0]);
     this.router.navigate(['/station']);
   }

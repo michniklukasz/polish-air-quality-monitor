@@ -1,7 +1,11 @@
 /* https://www.npmjs.com/package/material-icons */
 @import '~material-icons/iconfont/material-icons.css';
 
-* {
+html, body {
+  margin: 0;
+  color: rgb(68, 86, 111);
+  width: 100vw;
+  background-color: #E0E5EC;
   font-family: Montserrat, sans-serif;
   box-sizing: border-box;
    /* Support for all WebKit browsers. */
@@ -12,36 +16,55 @@
   text-rendering: optimizeLegibility;
   /* Support for IE. */
   font-feature-settings: 'liga';
+  --scrollbarBG: rgba(255,255,255, 0.5);
+  --thumbBG: hsl(215, 24%, 35%);
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+  --light-bg-color: #E0E5EC;
+  --mid-bg-color: rgba(255,255,255, 0.5);
+  --dark-bg-color: rgb(163,177,198,0.6);
+  --txt-color: rgb(68, 86, 111);
 }
-html, body {
-  margin: 0;
-  width: 100%;
-  background-color: rgb(65, 48, 217);
+body::-webkit-scrollbar {
+  width: 11px;
+}
+body::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
 }
 button {
-  color: white;
-  background-color: rgb(100,0,120);
   cursor: pointer;
-  border: none;
-  align-items: center;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+  background-color: #E0E5EC;
+  color: hsl(215, 24%, 35%);
 }
-
-p {
+p, span {
+  /* justify-content: center; */
+  font-size: 0.8em;
+}
+h1 {
+  font-size: 1.4em;
+  text-align: center;
+}
+h2 {
+  font-size: 0.9em;
+  text-align: center;
+}
+h3, h4 {
   font-size: 0.7em;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+  text-align: center;
 }
-h1, h2 {
-  font-size: 1.3em;
-  color: white;
-  text-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+textarea:focus, input:focus{
+  outline: 0;
 }
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
   font-size: 30px;  /* Preferred icon size */
-  color: rgb(234, 233, 247);
   display: inline-block;
   line-height: 1;
   text-transform: none;
@@ -50,109 +73,3 @@ h1, h2 {
   white-space: nowrap;
   direction: ltr;
 }
-/* top-bar.component*/
-app-top-bar {
-  display: -webkit-flex;
-  display: flex;
-  background-color: rgb(49, 33, 189);
-  width: 100%;
-  justify-content: space-between;
-  box-shadow: 0 3px black;
-}
-app-top-bar h1 {
-  text-align: center;
-  margin: 0 auto;
-  height: 60px;
-  line-height: 60px;
-}
-app-top-bar .top-icon {
-  width: 60px;
-  height: 60px;
-  box-sizing: border-box;
-  padding: 15px;
-}
-/* app-root.component */
-.container {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-}
-/*app=station-selection.component*/
-app-station-selection {
-  width: 84%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-}
-.banner {
-  width: 280px;
-  color: white;
-  margin: 15px 0 15px 5%;
-}
-.station-selection-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-.auto-localization {
-  width: 100%;
-  margin: 10px 0 20px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.auto-localization button {
-  width: 80%;
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing:0.7px;
-  box-sizing: border-box;
-  padding: 7px 15px;
-  height: 30px;
-  line-height: 15px;
-  border-radius: 6px;
-}
-.manual-localization {
-  width: 100%;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-flow: row wrap;
-  flex-flow: row wrap;
-}
-
-.manual-localization-banner{
-  width: 100%;
-  margin: 0 5%;
-}
-.manual-localization-form {
-  width: 100%;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-flow: row wrap;
-  flex-flow: row wrap;
-}
-.manual-localization-form label {
-  width: 100%;
-  margin: 0 5%;
-  font-weight: bold;
-  color: white;
-  text-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
-    -webkit-appearance: none;
-}
-.manual-localization-form select {
-  width: 90%;
-  margin: 10px 5%;
-  border: 1px solid grey;
-  border-radius: 5px;
-  color: black;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-.manual-localization-form option {
-  width: 90%;
-  
-}
-
-

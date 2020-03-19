@@ -1,39 +1,47 @@
-<div *ngIf="selectedStation$ !== null">
-    <div>
-        <h1>{{selectedStation$.city.name}}</h1>
-    </div>
-    <div>
-        <!-- Być może przyda sie utworzyc pipe do usuniecia ul. i numeru -->
+<div class="wrapper">
+    <div class="header"
+    *ngIf="selectedStation$ !== undefined">
+        <h1>
+            {{selectedStation$.city.name}}
+        </h1>
         <h2 *ngIf="selectedStation$.addressStreet !== null">{{selectedStation$.addressStreet}}</h2>
     </div>
-</div>
-<div>
-    <div>
-        <p>image</p>
-    </div>
-    <div>
-        <div>
-            <p *ngIf="overallQualityIndex !== undefined">Polski indeks jakości powietrza: {{overallQualityIndex.indexLevelName}}</p>
+    <div class="index"
+        *ngIf="overallQualityIndex !== undefined">
+        <p>Polski indeks jakości powietrza:</p>
+        <div class="index-value">
+            <b>
+                {{overallQualityIndex.indexLevelName}}
+            </b>
+            <span><i class="material-icons"
+            [style.background]="overallQualityIndexColor">
+                {{faceIcon}}</i>
+            </span>
         </div>
-        <div>
-            <p>image</p>
-        </div>
     </div>
+    <div *ngIf="selectedStationSensors !== undefined" class="sensor-data-container">
+            <app-sensor-data
+                *ngFor="let sensor of selectedStationSensors"
+                [sensor]="sensor" 
+                [stationId]="selectedStation$.id">
+            </app-sensor-data>
+    </div>
+    <footer>
+        <p>"Dane w tabeli wyświetlają się, jeżeli na stacji prowadzone są pomiary automatyczne (1-godzinne wyniki pomiarów) 
+            przynajmniej jednego z następujących zanieczyszczeń: pył PM10, pył PM2,5, ozon (O3), dwutlenek azotu (NO2),
+            dwutlenek siarki (SO2), benzen (C6H6), tlenek węgla (CO)." - powietrze.gios.gov.pl
+        </p>
+        <div class="references">
+            <p>WHO Air quality guidelines for</p>
+            <ul>
+                <li>
+                    <cite><a href="https://apps.who.int/iris/bitstream/handle/10665/69477/WHO_SDE_PHE_OEH_06.02_eng.pdf;jsessionid=4C747DDCC020DA2F4C8DC9B4E4F57D1B?sequence=1">particulate matter, ozone, nitrogen
+                        dioxide and sulfur dioxide</a></cite>
+                </li>
+                <li>
+                    <cite><a href="https://www.who.int/ipcs/features/benzene.pdf">benzene</a></cite>
+                </li>
+            </ul>
+        </div>
+    </footer>
 </div>
-<div>
-    <button (click)="check()">xxx</button>
-</div>
-<div *ngIf="selectedStationSensors !== undefined" class="sensor-data-container">
-    <ul>
-        <app-sensor-data 
-            *ngFor="let sensor of selectedStationSensors" 
-            [sensor]="sensor" 
-            [stationId]="selectedStation$.id">
-        </app-sensor-data>
-    </ul>
-</div>
-<footer>
-    <p>Dane w tabeli wyświetlają się, jeżeli na stacji prowadzone są pomiary automatyczne (1-godzinne wyniki pomiarów) przynajmniej jednego z następujących zanieczyszczeń: pył PM10, pył PM2,5, ozon (O3), dwutlenek azotu (NO2), dwutlenek siarki (SO2), benzen (C6H6), tlenek węgla (CO). </p>
-</footer>
-
-

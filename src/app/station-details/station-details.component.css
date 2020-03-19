@@ -1,12 +1,83 @@
-.sensor-data-container {
-    width: 680px;
-    height: 340px;
+.wrapper {
+    width: 290px;
+    margin: 0 auto 140px;
+    padding: 0 10px;
 }
-.sensor-data-container ul {
-    width: 100%;
-    height: 100%;
+.header {
     display: flex;
+    flex-direction: column;
+}
+.header h1 {
+    display: inline-block;
+    color: rgb(32, 41, 54);
+    position: absolute;
+    top: 0;
+    height: 80px;
+    line-height: 80px;
+    width: 290px;
+    margin: 0 auto;
+    padding: 0;
+}
+.header h2 {
+    display: inline-block;
+    color: rgb(32, 41, 54);
+    margin: 0 auto;
+    min-height: 20px;
+    line-height: 20px;
+}
+.index {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 30px;
+    padding: 0;
+}
+.index p {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    margin-bottom: 5px;
+}
+.index-value {
+    width: 100%;
+    display: flex;
+    min-height: 30px;
     flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center;
+}
+.index-value b {
+    height: 30px;
+    line-height: 30px;
+    padding: 0;
+    margin: 0 5px;
+}
+.index i {
+    color: black;
+    padding: 0;
+    margin: 0 5px;
+    border-radius: 30px;
+}
+.sensor-data-container {
+    width: 280px;
+    height: 240px;
+    margin: 0 auto;
+    overflow-y: auto;
+}
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 135px;
+    width: 280px;
+    padding: 5px 15px;
+    margin: 5px;
+}
+footer p {
+    font-size: 8px;
+    text-align: justify;
+}
+.references {
+    font-size: 8px;
+    color: black;
+    
 }

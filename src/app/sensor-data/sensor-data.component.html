@@ -1,9 +1,30 @@
-    <div class="sensor-data-box">
-        <button (click)="check()">btn</button>
-        <div *ngIf="currentValue !== undefined">
-            <!-- .idParam check if should apply CO units mg/m3 or units for rest ug/m3-->
-            <p *ngIf="sensor.param.idParam === 8">{{sensor.param.paramName}}: {{currentValue}} [mg/m<sup>3</sup>]</p>
-            <p *ngIf="sensor.param.idParam !== 8">{{sensor.param.paramName}}: {{currentValue}} [µg/m<sup>3</sup>]</p>
+    <div *ngIf="isActive" class="box">
+        <div class="text" *ngIf="currentValue !== undefined">
+            <div class="data">
+                <p>{{sensor.param.paramName}}: <b>{{currentValue}}</b> [µg/m<sup>3</sup>]</p>
+            </div>
+            <div class="hazard">
+                <i class="material-icons"
+                   *ngIf="currentPercentageValue > 60">
+                    warning
+                </i>
+            </div>
+        </div> 
+        <div class="bar">
+            <span [style.width.%]="barWidth"
+                  [style.background]="barColor">
+            </span>
         </div>
     </div>
-
+<!-- .idParam check if should apply CO units mg/m3 or units for rest ug/m3-->
+            <!-- <p *ngIf="sensor.param.idParam === 8">{{sensor.param.paramName}}: {{currentValue}} [mg/m<sup>3</sup>]</p>
+            <p *ngIf="sensor.param.idParam !== 8">{{sensor.param.paramName}}: {{currentValue}} [µg/m<sup>3</sup>]</p> -->
+            <!-- /*
+C6H6 5
+NO2 200
+SO2 350
+CO 10000
+PM10 50
+PM25 25 (pm2.5)
+O3
+*/ -->

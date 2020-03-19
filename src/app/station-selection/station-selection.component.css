@@ -1,0 +1,205 @@
+.content {
+    width: 300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+.content > .banner {
+    position: relative;
+    width: 250px;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 25px;
+    /* For Neumorphism Effect */
+    background-color:#E0E5EC;
+    box-shadow: inset 9px 9px 16px rgb(163,177,198,0.6), 
+               inset -9px -9px 16px    rgba(255,255,255, 0.5);
+    /* For Neumorphism Effect */
+  }
+  .banner h1,h4,p {
+    display: inline-block;
+    position: relative;
+  }
+  .banner h1 {
+    margin: 5px;
+    padding: 5px;
+    height: 40px;
+    line-height: 20px;
+  }
+  .banner h4 {
+    height: 30px;
+    line-height: 30px;
+    margin: 5px;
+  }
+  .banner p {
+    height: 24px;
+    line-height: 12px;
+    font-size: 8px;
+    margin: 5px;
+    text-align: center;
+  }
+  .selection {
+    position: relative;
+    display: flex;
+    width: 300px;
+    margin: 30px 0;
+    flex-direction: column;
+  }
+  .selection > .manual-selection {
+    width: 250px;
+    margin: 20px auto;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+    /* For Neumorphism Effect */
+    background-color:#E0E5EC;
+    box-shadow: inset 9px 9px 16px rgb(163,177,198,0.6), 
+               inset -9px -9px 16px    rgba(255,255,255, 0.5);
+    /* For Neumorphism Effect */
+  }
+  .manual-selection .bar {
+    width: 220px;
+    height: 30px;
+    padding: 5px 10px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    border-bottom: solid 1px rgb(163,177,198,0.6);
+    cursor: default;
+  }
+  .bar span {
+    display: block;
+    width: 180px;
+    height: 30px;
+    padding: 0 0 0 10px;
+    line-height: 30px;
+    font-weight: bold;
+  }
+  .manual-selection .form {
+    width: 100%;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+  }
+  .form-selections {
+    width: 100%;
+    height: 130px;
+  }
+  .form-selection {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    --scrollbarBG: rgba(255,255,255, 0.5);
+    --thumbBG: hsl(215, 24%, 35%);
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+  }
+  .form-selection::-webkit-scrollbar {
+    width: 6px;
+  }
+  .form-selection::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+  }
+  .form-selection::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG) ;
+    border-radius: 6px;
+    border: 3px solid var(--scrollbarBG);
+  }
+  .form-selection h3 {
+    margin: 10px 0;
+  }
+  ul {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    width: 100%; 
+  }
+
+  .selection-tab {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 220px;
+    min-height: 26px;
+    padding: 2px auto;
+    margin: 5px auto;
+    border-radius: 26px;
+    /* For Neumorphism Effect */
+    background-color:#E0E5EC;
+    box-shadow: 9px 9px 16px rgb(163,177,198,0.6), 
+                -9px -9px 16px    rgba(255,255,255, 0.5);
+    /* For Neumorphism Effect */
+    cursor: pointer;
+  }
+  .selection-tab i {
+    font-size: 20px;
+    padding: 1px 3px 5px 10px;
+  }
+ .selection-tab span {
+    display: block;
+    min-height: 20px;
+    line-height: 20px;
+    padding: 3px 0 2px 20px;
+ }
+ .selection-tab:hover {
+  color: #eb2f06;
+ }
+  .input-field {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 220px;
+    height: 30px;
+    margin: 10px auto;
+    border-radius: 25px;
+    /* For Neumorphism Effect */
+    background-color:#E0E5EC;
+    box-shadow: 9px 9px 16px rgb(163,177,198,0.6), 
+               -9px -9px 16px    rgba(255,255,255, 0.5);
+    /* For Neumorphism Effect */
+  }
+  .input-field input {
+    background-color:#E0E5EC;
+    margin-left: 20px;
+    width: 180px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0;
+    border: 0;
+  }
+  .input-field span {
+    color:#E0E5EC;
+    width: 35px;
+    height: 30px;
+    z-index: 10;
+    right: 40px;
+    background-color: #eb2f06;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+  }
+  input:valid {
+    background-color: #E0E5EC;
+  }
+  .input-field label {
+    position: absolute;
+    top: -5px;
+    left: 20px;
+    background-color: hsl(215, 24%, 35%);
+    color:#E0E5EC;
+    padding: 0 5px;
+    border-radius: 5px;
+    font-size: 8px;
+    height: 10px;
+    line-height: 10px;
+  }
+  

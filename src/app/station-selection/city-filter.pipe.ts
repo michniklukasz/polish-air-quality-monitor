@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Station } from '../I-selected-station';
 
 @Pipe({
   name: 'CityFilterPipe'
@@ -7,6 +6,7 @@ import { Station } from '../I-selected-station';
 export class CityFilterPipe implements PipeTransform {
 
   transform(cities: string[], cityTerm: string): any {
-    return !cities || !cityTerm ? cities : (cities.filter(city => city.toLowerCase().indexOf(cityTerm.toLowerCase()) !== -1));
+    return !cities || !cityTerm ? cities : (cities
+      .filter(city => city.toLowerCase().startsWith(cityTerm.toLowerCase())));
   }
 }
