@@ -1,83 +1,96 @@
 .wrapper {
-    width: 290px;
-    margin: 0 auto 140px;
-    padding: 0 10px;
+    width: 100vw;
+    min-height: 100vh;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.back-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0;
+}
+.back-btn i {
+    border-radius: 2rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    /* For Neumorphism Effect */
+    background-color:#E0E5EC;
+    box-shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px    rgba(255,255,255, 0.5);
+    /* For Neumorphism Effect */
+}
+.back-btn i:hover {
+    color: #eb2f06;
 }
 .header {
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
 .header h1 {
     display: inline-block;
-    color: rgb(32, 41, 54);
-    position: absolute;
-    top: 0;
-    height: 80px;
-    line-height: 80px;
-    width: 290px;
-    margin: 0 auto;
-    padding: 0;
+    height: 2.4rem;
+    line-height: 1.4rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    margin: 0 auto 0.5rem;
 }
 .header h2 {
     display: inline-block;
-    color: rgb(32, 41, 54);
-    margin: 0 auto;
-    min-height: 20px;
-    line-height: 20px;
+    margin: 0 auto 0.5rem;
+    padding: 0.5rem;
+    min-height: 1rem;
+    line-height: 1rem;
 }
 .index {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    margin: 5px 30px;
     padding: 0;
+    margin-bottom: 0.5rem;
 }
 .index p {
-    display: inline-block;
-    width: 100%;
     text-align: center;
-    margin: 0;
-    margin-bottom: 5px;
+    padding: 0.2rem;
+    margin: 0 auto 0.2rem;
 }
 .index-value {
-    width: 100%;
     display: flex;
-    min-height: 30px;
+    padding: 0.2rem;
     flex-direction: row;
     justify-content: center;
+    
 }
 .index-value b {
-    height: 30px;
-    line-height: 30px;
+    height: 2rem;
+    line-height: 2rem;
     padding: 0;
-    margin: 0 5px;
+    margin: 0;
 }
 .index i {
-    color: black;
+    height: 2rem;
     padding: 0;
-    margin: 0 5px;
-    border-radius: 30px;
+    margin: 0 0.5rem;
+    border-radius: 2rem;
 }
 .sensor-data-container {
-    width: 280px;
-    height: 240px;
-    margin: 0 auto;
-    overflow-y: auto;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
 }
 footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    height: 135px;
-    width: 280px;
-    padding: 5px 15px;
-    margin: 5px;
+    width: 100%;
+    min-height: 2rem;
+    font-size: 0.5rem;
+    margin-top: auto;
 }
 footer p {
-    font-size: 8px;
+    font-size: inherit;
     text-align: justify;
+    line-height: 0.5rem;
 }
-.references {
-    font-size: 8px;
-    color: black;
-    
+footer b {
+    font-size: inherit;
+    line-height: 0.5rem;
 }

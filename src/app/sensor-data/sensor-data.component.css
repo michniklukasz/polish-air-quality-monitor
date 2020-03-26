@@ -1,11 +1,9 @@
 .box {
     display: flex;
     flex-direction: column;
-    width: 260px;
-    padding: 10px;
-    margin: 0;
-    margin-bottom: 10px;
-    border-radius: 25px;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    border-radius: 1rem;
     /* For Neumorphism Effect */
     background-color:#E0E5EC;
     box-shadow: inset 9px 9px 16px rgb(163,177,198,0.6), 
@@ -17,21 +15,33 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+    padding: 0.5rem;
+}
+.data {
+    display: flex;
+    flex-direction: column;
 }
 .data p {
-    color: black;
-    padding: 5px;
+    line-height: 1rem;
+    min-height: 1rem;
     margin: 0;
-    margin-bottom: 5px;
 }
-.hazard i {
+.data sup {
+    line-height: 0;
+}
+.hazard {
     color: #7e0023;
+    display: flex;
+    flex-direction: row;
+}
+.hazard b {
+    height: 2rem;
+    line-height: 2rem;
 }
 .bar {
-    height: 20px;
-    width: 100%;
-    position: relative;
-    border-radius: 10px;
+    height: 1rem;
+    margin: 0 0.5rem 0.5rem;
+    border-radius: 0.5rem;
     /* For Neumorphism Effect */
     background-color:#E0E5EC;
     box-shadow: inset 9px 9px 16px rgb(163,177,198,0.6), 
@@ -40,9 +50,26 @@
     overflow: hidden;
    }
 .bar span {
-    display: block;
-    height: 20px;
-    border-radius: 10px;
+    display: inline-block;
+    height: 1.5rem;
     padding: 0;
     margin: 0;
+}
+@media (min-width: 375px) {
+
+}
+@media (min-width: 500px) {
+    .data {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .data p {
+        line-height: 2rem;
+    }
+    .data b {
+        margin-left: 0.5rem;
+    }
+}
+@media (min-width: 1024px) {
+
 }

@@ -1,34 +1,42 @@
 .auto-localization {
-  position: relative;
-  width: 300px; 
-  height: 50px;
-  margin: auto 0;
-  }
+  width: 100%;
+}
 button {
   display: flex;
   flex-direction: row;
-  width: 260px;
-  margin: 0 auto;
-  padding: 5px 10px;
-  height: 45px;
-  border: none;
-  border-radius: 45px;
-    /* For Neumorphism Effect */
-    background-color:#E0E5EC;
-    box-shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px    rgba(255,255,255, 0.5);
-    /* For Neumorphism Effect */
+  color: #eb2f06;
+  font-weight: bold;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  height: 2.4rem;
+  border-radius: 1rem;
+  border: solid 1px #eb2f06;
+  /* For Neumorphism Effect */
+  background-color:#E0E5EC;
+  box-shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px    rgba(255,255,255, 0.5);
+  /* For Neumorphism Effect */
 }
 button:hover {
-  color: #eb2f06;
+  background-color:#eb2f06;
+  color: #E0E5EC;
+}
+button:active{
+  background-color:#eb2f06;
+  color: #E0E5EC;
+}
+button i {
+  width: 20%;
+  padding: 0.2rem 0.4rem;
 }
 button span {
-  display: block;
-  width: 210px;
-  height: 30px;
-  line-height: 30px;
-  font-size: 12px;
-  font-weight: bold;
+  display: inline-block;
   text-align: center;
+  margin: auto 0;
+  width: 80%;
+  min-height: 0.8rem;
+  line-height: 0.8rem;
+  padding: 0.2rem;
 }
   
   

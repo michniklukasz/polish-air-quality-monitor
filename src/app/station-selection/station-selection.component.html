@@ -1,70 +1,74 @@
 <div class="content">
+  <div class="top-bar">
+    <h1>AIRe</h1>
+    <i class="material-icons">
+        favorite
+    </i>
+  </div>
   <div class="banner">
     <h2>Poznaj jakość powietrza w Twoim otoczeniu.</h2>
-    <!-- <h4>Gdzie się znajdujesz?</h4> -->
     <p>(Aplikacja może wymagać znajomojości Twojej lokalizacji)</p>
+    <app-user-auto-localization [stations]="stations"></app-user-auto-localization>
+    <img src="assets/images/air_image.jpg" alt='image'>
   </div>
   <div class="selection">
-    <app-user-auto-localization [stations]="stations"></app-user-auto-localization>
-    <div class="manual-selection">
+    <div class="manual">
       <div class="bar">
         <i class="material-icons">search</i>
-        <span>WYBIERZ SAMODZIELNIE</span>
+        <h4>WYBIERZ SAMODZIELNIE</h4>
       </div>
       <div class="form">
-        <div class="input-field">
-          <label for="voivodeship">Województwo:</label>
-          <input id="voivodeship" 
-                name="voivodeship"
-                [(ngModel)]="voivodeshipTerm"
-                 value="{{selectedVoivodeship}}"
-                 placeholder="{{selectedVoivodeship ? selectedVoivodeship : 'województwo...'}}"
-                 type="text" 
-                 (keydown.backspace)="deleteSelectedVoivodeship()" required>
-          <span *ngIf="this.selectedVoivodeship !== undefined"
-                (click)="deleteSelectedVoivodeship()">
-                <i class="material-icons">close</i>
-          </span>
-                 <!-- <button *ngIf="this.selectedVoivodeship !== undefined"
-                  (click)="deleteSelectedVoivodeship()">X</button> -->
-        </div>
-        <div class="input-field"
-            *ngIf="selectedVoivodeship !==undefined">
-          <label for="city">Miasto:</label>
-          <input type="text"
-                id="city" 
-                value = "{{selectedCity}}"
-                placeholder="{{ selectedCity ? selectedCity : 'Miasto...'}}"
-                [(ngModel)]="cityTerm">
-          <span *ngIf="this.selectedCity !== undefined"
-                (click)="deleteSelectedCity()">
-                <i class="material-icons">close</i>
-          </span>
-          <!-- <button *ngIf="this.selectedCity !== undefined"
-                  (click)="deleteSelectedCity()">X</button> -->
+        <div class="input-fields">
+          <div class="input-field">
+            <label for="voivodeship">województwo:</label>
+            <input id="voivodeship" 
+                  name="voivodeship"
+                  [(ngModel)]="voivodeshipTerm"
+                   value="{{selectedVoivodeship}}"
+                   placeholder="{{selectedVoivodeship ? selectedVoivodeship : 'wyszukaj województwo...'}}"
+                   type="text" 
+                   (keydown.backspace)="deleteSelectedVoivodeship()" required>
+            <span *ngIf="this.selectedVoivodeship !== undefined"
+                  (click)="deleteSelectedVoivodeship()">
+                  <i class="material-icons">close</i>
+            </span>
+          </div>
+          <div class="input-field"
+              *ngIf="selectedVoivodeship !==undefined">
+            <label for="city">miasto:</label>
+            <input type="text"
+                  id="city" 
+                  value = "{{selectedCity}}"
+                  placeholder="{{ selectedCity ? selectedCity : 'wyszukaj miasto...'}}"
+                  [(ngModel)]="cityTerm">
+            <span *ngIf="this.selectedCity !== undefined"
+                  (click)="deleteSelectedCity()">
+                  <i class="material-icons">close</i>
+            </span>
+          </div>
         </div>
         <div class="form-selections">
           <div class="form-selection" 
               *ngIf="selectedVoivodeship === undefined">
+            <h4>WOJEWÓDZTWA</h4>
             <ul>
-                <li *ngFor="let voivodeship of voivodeships | VoivodeshipFilterPipe: voivodeshipTerm"
+                <li class="selection-tab"
+                    *ngFor="let voivodeship of voivodeships | VoivodeshipFilterPipe: voivodeshipTerm"
                     (click)="getSelectedVoivodeship(voivodeship)">
-                  <div class="selection-tab">
                     <i class="material-icons">touch_app</i>
                     <span>{{voivodeship}}</span>
-                  </div>
                 </li>
             </ul>
           </div>
           <div class="form-selection"
               *ngIf="selectedVoivodeship !==undefined && selectedCity === undefined">
+            <h4>MIASTA</h4>
             <ul>
-              <li *ngFor="let city of cities | CityFilterPipe: cityTerm" 
+              <li class="selection-tab"
+                  *ngFor="let city of cities | CityFilterPipe: cityTerm" 
                   (click)="getSelectedCity(city)">
-                <div class="selection-tab">
                   <i class="material-icons">touch_app</i>
                   <span>{{city}}</span>
-                </div>
               </li>
             </ul>
           </div>
@@ -72,17 +76,16 @@
               *ngIf="selectedVoivodeship !== undefined && selectedCity !== undefined">
             <h2>{{selectedCity}}</h2>
             <ul>
-              <li *ngFor="let station of stationsInCity"
+              <li  class="selection-tab"
+                  *ngFor="let station of stationsInCity"
                   (click)="goToSelectedStation(station)">
-                <div class="selection-tab">
                   <i class="material-icons">touch_app</i>
                   <span>{{station.addressStreet}}</span>
-                </div>
               </li>
             </ul>
           </div>
         </div>
       </div>    
     </div>
-  </div>  
+  </div>
 </div>

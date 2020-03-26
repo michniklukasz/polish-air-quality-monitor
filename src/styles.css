@@ -1,10 +1,14 @@
 /* https://www.npmjs.com/package/material-icons */
 @import '~material-icons/iconfont/material-icons.css';
-
+* {
+  box-sizing: border-box;
+}
 html, body {
   margin: 0;
-  color: rgb(68, 86, 111);
   width: 100vw;
+  height: 100vh;
+  color: rgb(32, 41, 54);
+  font-size: calc(1em + 1vw);
   background-color: #E0E5EC;
   font-family: Montserrat, sans-serif;
   box-sizing: border-box;
@@ -20,42 +24,42 @@ html, body {
   --thumbBG: hsl(215, 24%, 35%);
   scrollbar-width: thin;
   scrollbar-color: var(--thumbBG) var(--scrollbarBG);
-  --light-bg-color: #E0E5EC;
-  --mid-bg-color: rgba(255,255,255, 0.5);
-  --dark-bg-color: rgb(163,177,198,0.6);
-  --txt-color: rgb(68, 86, 111);
 }
 body::-webkit-scrollbar {
-  width: 11px;
+  width: 0.4rem;
 }
 body::-webkit-scrollbar-track {
   background: var(--scrollbarBG);
 }
 body::-webkit-scrollbar-thumb {
   background-color: var(--thumbBG);
-  border-radius: 6px;
-  border: 3px solid var(--scrollbarBG);
+  border-radius: 0.3rem;
+  border: 0.1rem solid var(--scrollbarBG);
 }
 button {
   cursor: pointer;
   background-color: #E0E5EC;
-  color: hsl(215, 24%, 35%);
+  border: none;
 }
-p, span {
+p, b, span {
   /* justify-content: center; */
-  font-size: 0.8em;
+  font-size: 0.8rem;
+}
+h1, h2, h3, h4 {
+  text-align: center;
+  justify-content: center;
 }
 h1 {
-  font-size: 1.4em;
-  text-align: center;
+  font-size: 1.4rem;
 }
 h2 {
-  font-size: 0.9em;
-  text-align: center;
+  font-size: 1rem;
 }
 h3, h4 {
-  font-size: 0.7em;
-  text-align: center;
+  font-size: 0.8rem;
+}
+ul {
+  list-style-type: none;
 }
 textarea:focus, input:focus{
   outline: 0;
@@ -64,7 +68,7 @@ textarea:focus, input:focus{
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  font-size: 30px;  /* Preferred icon size */
+  font-size: 2rem;  /* Preferred icon size */
   display: inline-block;
   line-height: 1;
   text-transform: none;

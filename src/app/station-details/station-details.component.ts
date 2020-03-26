@@ -6,7 +6,6 @@ import { StationsDataService } from '../stations-data.service';
 import { Station } from '../I-selected-station';
 import { Sensor } from '../I-sensor';
 import { IndexLevel } from '../I-index-level';
-import { TopBarService } from '../top-bar.service';
 
 @Component({
   selector: 'app-station-details',
@@ -27,7 +26,6 @@ export class StationDetailsComponent implements OnInit {
   constructor(
     private stationsData: StationsDataService,
     private router: Router,
-    private topBar: TopBarService,
   ) {
     // initially as undefined, before promise in ngOnInit starts
     this.selectedStation$ = undefined;
@@ -63,9 +61,10 @@ export class StationDetailsComponent implements OnInit {
       return 'face';
     }
   }
+  public backToMain() {
+    this.router.navigate(['']);
+  }
   ngOnInit() {
-    // set visibility of elements in top-bar.component through top-bar.service
-    this.topBar.show();
     // make api call and data manipulation
     return new Promise((resolve, reject) => {
       this.stationsData.selectedStation$.subscribe(selectedStation => {

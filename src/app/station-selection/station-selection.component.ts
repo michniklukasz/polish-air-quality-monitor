@@ -3,7 +3,6 @@ import { StationsDataService } from '../stations-data.service';
 import { Station } from '../I-selected-station';
 import { Router } from '@angular/router';
 import { voivodeships } from '../hand-held-data';
-import { TopBarService } from '../top-bar.service';
 
 @Component({
   selector: 'app-station-selection',
@@ -31,7 +30,6 @@ export class StationSelectionComponent implements OnInit {
   constructor(
     private stationsData: StationsDataService,
     private router: Router,
-    private topBar: TopBarService,
   ) {
     // setting initial values
     this.selectedVoivodeship = undefined;
@@ -108,8 +106,6 @@ export class StationSelectionComponent implements OnInit {
   }
   // ----------------------------------------------OnInit-----------------------------------------------
   ngOnInit() {
-    // hide elements in top-bar.component through top-bar.service
-    this.topBar.hide();
     // gets all stations list form localStorage if its egsists in storage, else skip futher
     this.stations = this.getStationsFromLocalStorage('stations');
     this.stationsData.getStations()
