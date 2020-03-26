@@ -5,7 +5,6 @@ import { Station } from './I-selected-station';
 import { map, tap, timeout} from 'rxjs/operators';
 import { SensorData } from './I-sensor-data';
 import { Sensor } from './I-sensor';
-import { IndexLevel } from './I-index-level';
 
 
 @Injectable({
@@ -13,10 +12,10 @@ import { IndexLevel } from './I-index-level';
 })
 export class StationsDataService {
   // ----------------------------------------URL TO GIOS-API DATA----------------------------------------------
-  private STATIONS_URL = 'http://api.gios.gov.pl/pjp-api/rest/station/findAll';
-  private STATION_DATA_URL = 'http://api.gios.gov.pl/pjp-api/rest/station/sensors/';
-  private SENSOR_DATA_URL = 'http://api.gios.gov.pl/pjp-api/rest/data/getData/';
-  private STATION_AQI = 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/';
+  private STATIONS_URL = 'https://cors-anywhere.herokuapp.com/http://api.gios.gov.pl/pjp-api/rest/station/findAll';
+  private STATION_DATA_URL = 'https://cors-anywhere.herokuapp.com/http://api.gios.gov.pl/pjp-api/rest/station/sensors/';
+  private SENSOR_DATA_URL = 'https://cors-anywhere.herokuapp.com/http://api.gios.gov.pl/pjp-api/rest/data/getData/';
+  private STATION_AQI = 'https://cors-anywhere.herokuapp.com/http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/';
   // ----------------------------------------SETING BEHAVIORAL SUBJECT-----------------------------------------
   private selectedStationSource = new BehaviorSubject<Station>(null);
   public selectedStation$: Station | any = this.selectedStationSource.asObservable();

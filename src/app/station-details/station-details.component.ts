@@ -33,8 +33,8 @@ export class StationDetailsComponent implements OnInit {
   // set color at overallQualityIndex
   private indexColors(QualityIndex: string): string {
     const x = QualityIndex;
-    switch(true) {
-      case (x === 'Bardzo dobry'):
+    switch (true) {
+      case(x === 'Bardzo dobry'):
         return 'rgb(0, 153, 102)';
       case(x === 'Dobry'):
         return 'rgb(255, 222, 51)';
@@ -55,7 +55,7 @@ export class StationDetailsComponent implements OnInit {
   // index face
   indexFaceIcon(QualityIndex: string): string {
     const x = QualityIndex;
-    if(x === 'Bardzo dobry') {
+    if (x === 'Bardzo dobry') {
       return 'tag_faces';
     } else {
       return 'face';
