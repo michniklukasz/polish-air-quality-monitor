@@ -29,7 +29,8 @@ import { CityFilterPipe } from './station-selection/city-filter.pipe';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: StationSelectionComponent },
+      { path: '', redirectTo: 'main', pathMatch: 'full'},
+      { path: 'main', component: StationSelectionComponent },
       { path: 'station', component: StationDetailsComponent },
     ])
   ],
