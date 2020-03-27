@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { StationsDataService } from '../stations-data.service';
-import { Station } from '../I-selected-station';
 import { Router } from '@angular/router';
+// services
+import { StationsDataService } from '../stations-data.service';
+import { SpinnerService } from '../spinner.service';
+// interfaces
+import { Station } from '../I-selected-station';
+// initialization data
 import { voivodeships } from '../hand-held-data';
+
 
 @Component({
   selector: 'app-station-selection',
@@ -28,9 +33,12 @@ export class StationSelectionComponent implements OnInit {
   // filtered stationsInVoivodeship, represents stations in seleted city
   stationsInCity: Station[];
   constructor(
+    public spinner: SpinnerService,
     private stationsData: StationsDataService,
     private router: Router,
   ) {
+    // show spinner when loading component and stations data
+    this.spinner.showSpinner();
     // setting initial values
     this.selectedVoivodeship = undefined;
     this.selectedCity = undefined;
@@ -112,10 +120,12 @@ export class StationSelectionComponent implements OnInit {
       .subscribe(data => {
         this.stations = data;
         this.setItemToLocalStorage('stations', data);
+        // shows component content and hides spinner
+        this.spinner.hideSpinner();
       },
       error => {
         console.log(error);
-        alert('Wystąpił problem z pobieraniem danych, sprawdź połączenie z internetem lub połączenie typu CORS w swojej przeglądarce.');
+        alert('Wystąpił problem z pobieraniem danych. Sprawdź połączenie z internetem lub odśwież stronę');
         // when problem with fetch data, redirect to connection-error page
         // this.router.navigate(['/connection-error']);
       });

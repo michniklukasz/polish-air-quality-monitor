@@ -1,4 +1,11 @@
-<div class="wrapper">
+<!-- when component data is loaded -->
+<div class="spinner-wrapper"
+    *ngIf="spinner.visibleSpinner">
+  <app-spinner></app-spinner>
+</div>
+<!-- component main content -->
+<div class="wrapper"
+    *ngIf="spinner.visibleContent">
     <!-- positioned absolute -->
     <button class="back-btn">
         <i class="material-icons"

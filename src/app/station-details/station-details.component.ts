@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // services
 import { StationsDataService } from '../stations-data.service';
+import { SpinnerService } from '../spinner.service';
 // interfaces
 import { Station } from '../I-selected-station';
 import { Sensor } from '../I-sensor';
 import { IndexLevel } from '../I-index-level';
+
 
 @Component({
   selector: 'app-station-details',
@@ -24,9 +26,12 @@ export class StationDetailsComponent implements OnInit {
   // face icon color
   overallQualityIndexColor: string;
   constructor(
+    public spinner: SpinnerService,
     private stationsData: StationsDataService,
     private router: Router,
   ) {
+    // show spinner when loading component and stations data
+    this.spinner.showSpinner();
     // initially as undefined, before promise in ngOnInit starts
     this.selectedStation$ = undefined;
   }
@@ -83,6 +88,10 @@ export class StationDetailsComponent implements OnInit {
           this.faceIcon = this.indexFaceIcon(this.overallQualityIndex.indexLevelName);
           this.overallQualityIndexColor = this.indexColors(this.overallQualityIndex.indexLevelName);
         });
+      })
+      .then(() => {
+        // shows component content and hides spinner
+        this.spinner.hideSpinner();
       })
       .catch(error => {
         console.log(error);

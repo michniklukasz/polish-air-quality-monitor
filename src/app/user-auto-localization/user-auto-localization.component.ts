@@ -6,7 +6,14 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-auto-localization',
-  templateUrl: './user-auto-localization.component.html',
+  template: `
+    <div class="auto-localization">
+      <button (click)="onAutoSubmit()">
+        <i class="material-icons">my_location</i>
+        <span>UŻYJ OBECNEJ LOKALIZACJI</span>
+      </button>
+    </div>
+  `,
   styleUrls: ['./user-auto-localization.component.css']
 })
 export class UserAutoLocalizationComponent implements OnInit {

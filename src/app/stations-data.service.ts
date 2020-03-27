@@ -26,7 +26,7 @@ export class StationsDataService {
   getStations(): Observable<Station[]> {
     return this.http.get<Station[]>(this.STATIONS_URL).pipe(
       // Why it works but VS Code shout its an Object...??
-      timeout(5000),
+      timeout(30000),
       tap(data => data.sort((a, b) => (a.city.name > b.city.name) ? 1 : ((b.city.name > a.city.name) ? -1 : 0))),
     );
   }

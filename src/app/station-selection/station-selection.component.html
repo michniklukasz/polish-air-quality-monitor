@@ -1,4 +1,11 @@
-<div class="content">
+<!-- when component data is loaded -->
+<div class="spinner-wrapper"
+    *ngIf="spinner.visibleSpinner">
+  <app-spinner></app-spinner>
+</div>
+<!-- component main content -->
+<div class="content"
+    *ngIf="spinner.visibleContent">
   <div class="top-bar">
     <h1>AIRe</h1>
     <i class="material-icons">

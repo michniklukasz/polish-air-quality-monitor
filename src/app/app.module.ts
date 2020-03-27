@@ -11,6 +11,7 @@ import { SensorDataComponent } from './sensor-data/sensor-data.component';
 import { UserAutoLocalizationComponent } from './user-auto-localization/user-auto-localization.component';
 import { VoivodeshipFilterPipe } from './station-selection/voivodeship-filter.pipe';
 import { CityFilterPipe } from './station-selection/city-filter.pipe';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { CityFilterPipe } from './station-selection/city-filter.pipe';
     UserAutoLocalizationComponent,
     CityFilterPipe,
     VoivodeshipFilterPipe,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
