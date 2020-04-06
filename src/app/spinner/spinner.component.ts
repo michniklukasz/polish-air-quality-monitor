@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
           <span class="dot"></span>
           <span class="dot"></span>
         </div>
-          <b class="message">Pobieranie danych...</b>
+        <b class="message">Pobieranie danych...</b>
       </div>
     </div>
   `,

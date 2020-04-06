@@ -10,15 +10,15 @@
   .loader {
     position: relative;
     width: 240px;
-    height: 100px;
-    left: calc(50% - 120px);
+    margin: 0 auto;
     top: 35%;
     display: flex;
     flex-flow: column wrap;
   }
   .dots-wrapper {
-    width: 250px;
+    width: 240px;
     height: 45px;
+    margin: 0 auto;
     padding: 0 30px;
     display: flex;
     flex-flow: row nowrap;
@@ -49,7 +49,7 @@
     min-height: 1.4rem;
     line-height: 0.8rem;
     padding: 0.3rem;
-    margin-top: auto;
+    margin: 2rem auto;
     text-align: center;
   }
   @keyframes bounce {
